@@ -1,6 +1,5 @@
-/* eslint-disable */ 
-const roundNum = num => {
-  return Math.floor(num)
+const roundNum = (num) => {
+  return Math.floor(num);
 };
 
 const power = (num, pow) => {
@@ -22,7 +21,7 @@ const dateType = (type, days) => {
 
 const factor = (periodType, days) => {
   const data = dateType(periodType, days);
-  return data / 3;
+  return data/3;
 };
 
 const dollarsInFlight = (data, days, periodType) => {
@@ -45,7 +44,7 @@ const covid19ImpactEstimator = (data) => {
   impact.currentlyInfected = impactCurrentlyInfected;
   severeImpact.currentlyInfected = sImpactCurrentlyInfected;
 
-  //infectionsByRequestedTime
+  // infectionsByRequestedTime
   const factorNum = factor(data.periodType, data.timeToElapse);
   const rFactorNum = roundNum(factorNum);
   const impactInfectionsByRequestedTime = impactCurrentlyInfected * power(2, rFactorNum);
@@ -54,21 +53,21 @@ const covid19ImpactEstimator = (data) => {
   impact.infectionsByRequestedTime = impactInfectionsByRequestedTime;
   severeImpact.infectionsByRequestedTime = sImpactInfectionsByRequestedTime;
 
-  //severeCasesByRequestedTime
+  // severeCasesByRequestedTime
   const impactSevereCasesByRequestedTime = percentageMethod(impactInfectionsByRequestedTime, 15);
   const sImpactSevereCasesByRequestedTime = percentageMethod(sImpactInfectionsByRequestedTime, 15);
 
   impact.severeCasesByRequestedTime = roundNum(impactSevereCasesByRequestedTime);
   severeImpact.severeCasesByRequestedTime = roundNum(sImpactSevereCasesByRequestedTime);
 
-  //hospitalBedsByRequestedTime
+  // hospitalBedsByRequestedTime
   const impactHospitalBedsByRequestedTime = percentageMethod(data.totalHospitalBeds, 35) - roundNum(impactSevereCasesByRequestedTime);
   const sImpactHospitalBedsByRequestedTime = percentageMethod(data.totalHospitalBeds, 35) - roundNum(sImpactSevereCasesByRequestedTime);
 
   impact.hospitalBedsByRequestedTime = roundNum(impactHospitalBedsByRequestedTime);
   severeImpact.hospitalBedsByRequestedTime = roundNum(sImpactHospitalBedsByRequestedTime);
 
-  //casesForICUByRequestedTime
+  // casesForICUByRequestedTime
   const impactCasesForICUByRequestedTime = percentageMethod(impactInfectionsByRequestedTime, 5);
   const sImpactCasesForICUByRequestedTime = percentageMethod(sImpactInfectionsByRequestedTime, 5);
 
@@ -91,7 +90,7 @@ const covid19ImpactEstimator = (data) => {
     data,
     impact,
     severeImpact
-  }
+  };
 }
 
 export default covid19ImpactEstimator;
