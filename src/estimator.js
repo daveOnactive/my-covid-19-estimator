@@ -58,25 +58,27 @@ const covid19ImpactEstimator = (data) => {
   severeImpact.hospitalBedsByRequestedTime = roundNum(sImpactHospital) + 1;
 
   // casesForICUByRequestedTime
-  // const impactCasesForICUByRequestedTime = percentage(impactInfectionsByRequestedTime, 5);
-  // const sImpactCasesForICUByRequestedTime = percentage(sImpactInfectionsByRequestedTime, 5);
+  const impactCasesForICUByRequestedTime = percentage(impactInfectionsByRequestedTime, 5);
+  const sImpactCasesForICUByRequestedTime = percentage(sImpactInfectionsByRequestedTime, 5);
 
-  // impact.casesForICUByRequestedTime = roundNum(impactCasesForICUByRequestedTime);
-  // severeImpact.casesForICUByRequestedTime = roundNum(sImpactCasesForICUByRequestedTime);
+  impact.casesForICUByRequestedTime = roundNum(impactCasesForICUByRequestedTime);
+  severeImpact.casesForICUByRequestedTime = roundNum(sImpactCasesForICUByRequestedTime);
 
-  // // casesForVentilatorsByRequestedTime
-  // const impactCaseForVentilators = percentage(impactInfectionsByRequestedTime, 2);
-  // const sImpactCaseForVentilators = percentage(sImpactInfectionsByRequestedTime, 2);
+  // casesForVentilatorsByRequestedTime
+  const impactCaseForVentilators = percentage(impactInfectionsByRequestedTime, 2);
+  const sImpactCaseForVentilators = percentage(sImpactInfectionsByRequestedTime, 2);
 
-  // impact.casesForVentilatorsByRequestedTime = roundNum(impactCaseForVentilators);
-  // severeImpact.sImpactCaseForVentilatorsByRequestedTime = roundNum(sImpactCaseForVentilators);
-  impact.casesForICUByRequestedTime = Math.trunc(percentage(impactInfectionsByRequestedTime, 5));
-  const x = Math.trunc(percentage(sImpactInfectionsByRequestedTime, 5));
-  severeImpact.casesForICUByRequestedTime = x;
-  const y = Math.trunc(percentage(impactInfectionsByRequestedTime, 2));
-  impact.casesForVentilatorsByRequestedTime = y;
-  const sImpactCaseForVentilators = Math.trunc(percentage(sImpactInfectionsByRequestedTime, 2));
-  severeImpact.casesForVentilatorsByRequestedTime = sImpactCaseForVentilators;
+  impact.casesForVentilatorsByRequestedTime = roundNum(impactCaseForVentilators);
+  severeImpact.sImpactCaseForVentilatorsByRequestedTime = roundNum(sImpactCaseForVentilators);
+
+  // impact.casesForICUByRequestedTime = Math.trunc(percentage(impactInfectionsByRequestedTime, 5));
+  // const x = Math.trunc(percentage(sImpactInfectionsByRequestedTime, 5));
+  // severeImpact.casesForICUByRequestedTime = x;
+
+  // const y = Math.trunc(percentage(impactInfectionsByRequestedTime, 2));
+  // impact.casesForVentilatorsByRequestedTime = y;
+  // const sImpactCaseForVentilators = Math.trunc(percentage(sImpactInfectionsByRequestedTime, 2));
+  // severeImpact.casesForVentilatorsByRequestedTime = sImpactCaseForVentilators;
 
   // dollarsInFlight
   const days = dateType(data.periodType, data.timeToElapse);
