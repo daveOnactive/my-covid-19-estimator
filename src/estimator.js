@@ -64,7 +64,8 @@ const covid19ImpactEstimator = (data) => {
   // casesForVentilatorsByRequestedTime
   impact.casesForVentilatorsByRequestedTime = percentage(impactInfectionsByRequestedTime, 2);
   const z = percentage(sImpactInfectionsByRequestedTime, 2);
-  severeImpact.sImpactCaseForVentilatorsByRequestedTime = z;
+  severeImpact.casesForVentilatorsByRequestedTime = z;
+
   impact.casesForICUByRequestedTime = percentage(impactInfectionsByRequestedTime, 5);
   const x = percentage(sImpactInfectionsByRequestedTime, 5);
   severeImpact.casesForICUByRequestedTime = x;
