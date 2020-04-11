@@ -27,17 +27,17 @@ const covid19ImpactEstimator = (data) => {
   const severeImpact = {};
 
   // currentlyInfected
-  const impactCurrentlyInfected = data.reportedCases * 10;
-  const sImpactCurrentlyInfected = data.reportedCases * 50;
+  const impactInfected = data.reportedCases * 10;
+  const sImpactInfected = data.reportedCases * 50;
 
-  impact.currentlyInfected = impactCurrentlyInfected;
-  severeImpact.currentlyInfected = sImpactCurrentlyInfected;
+  impact.currentlyInfected = impactInfected;
+  severeImpact.currentlyInfected = sImpactInfected;
 
   // infectionsByRequestedTime
   const factorNum = factor(data.periodType, data.timeToElapse);
   const rFactorNum = roundNum(factorNum);
-  const impactInfectionsByRequestedTime = impactCurrentlyInfected * power(2, rFactorNum);
-  const sImpactInfectionsByRequestedTime = sImpactCurrentlyInfected * power(2, rFactorNum);
+  const impactInfectionsByRequestedTime = roundNum(impactInfected * power(2, rFactorNum));
+  const sImpactInfectionsByRequestedTime = roundNum(sImpactInfected * power(2, rFactorNum));
 
   impact.infectionsByRequestedTime = impactInfectionsByRequestedTime;
   severeImpact.infectionsByRequestedTime = sImpactInfectionsByRequestedTime;
