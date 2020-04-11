@@ -1,4 +1,4 @@
-//  /* eslint-disable */ 
+/* eslint-disable */ 
 const roundNum = num => {
   return Math.floor(num)
 };
