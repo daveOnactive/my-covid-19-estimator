@@ -17,10 +17,10 @@ const dateType = (type, days) => {
 
 const factor = (periodType, days) => {
   const data = dateType(periodType, days);
-  return data / 3;
+  return roundNum(data / 3);
 };
 
-const percentage = (num, percent) => (num * percent) / 100;
+const percentage = (num, percent) => roundNum((num * percent) / 100);
 
 const covid19ImpactEstimator = (data) => {
   const impact = {};
@@ -58,19 +58,13 @@ const covid19ImpactEstimator = (data) => {
   severeImpact.hospitalBedsByRequestedTime = roundNum(sImpactHospital) + 1;
 
   // casesForICUByRequestedTime
-  const impactCasesForICUByRequestedTime = percentage(impactInfectionsByRequestedTime, 5);
-  const sImpactCasesForICUByRequestedTime = percentage(sImpactInfectionsByRequestedTime, 5);
-
-  impact.casesForICUByRequestedTime = roundNum(impactCasesForICUByRequestedTime);
-  severeImpact.casesForICUByRequestedTime = roundNum(sImpactCasesForICUByRequestedTime);
+  impact.casesForICUByRequestedTime = percentage(impactInfectionsByRequestedTime, 5);
+  severeImpact.casesForICUByRequestedTime = percentage(sImpactInfectionsByRequestedTime, 5);
 
   // casesForVentilatorsByRequestedTime
-  const impactCaseForVentilators = percentage(impactInfectionsByRequestedTime, 2);
-  const sImpactCaseForVentilators = percentage(sImpactInfectionsByRequestedTime, 2);
-
-  impact.casesForVentilatorsByRequestedTime = roundNum(impactCaseForVentilators);
-  severeImpact.sImpactCaseForVentilatorsByRequestedTime = roundNum(sImpactCaseForVentilators);
-
+  impact.casesForVentilatorsByRequestedTime = percentage(impactInfectionsByRequestedTime, 2);
+  const z = percentage(sImpactInfectionsByRequestedTime, 2);
+  severeImpact.sImpactCaseForVentilatorsByRequestedTime = z;
   // impact.casesForICUByRequestedTime = Math.trunc(percentage(impactInfectionsByRequestedTime, 5));
   // const x = Math.trunc(percentage(sImpactInfectionsByRequestedTime, 5));
   // severeImpact.casesForICUByRequestedTime = x;
