@@ -1,55 +1,80 @@
-// import { factor } from './factor';
-// import { power, roundNum } from './mathMethods';
-// import { percentageMethod } from './percentage';
-const data = {
-  reportedCases: 2747,
-  periodType: 'days',
-  timeToElapse: 38,
-}
 
 const roundNum = num => Math.floor(num);
 
 const power = (num, pow) => Math.pow(num, pow);
 
-const factor = (periodType, days) => {
-  switch(periodType) {
+const dateType = (type, days) => {
+  switch(type) {
     case 'days':
-      return 1 * days / 3 ;
+      return days;
     case 'weeks':
-      return 7 * days / 3;
+      return 7 * days;
     case 'months':
-      return 30 * days / 3;
+      return 30 * days
     default:
-      return;
+      return days;
   }
+}
+
+const factor = (periodType, days) => {
+  const data = dateType(periodType, days);
+  return data / 3;
 };
 
+const dollarsInFlight = (data, days, periodType) => (data * 0.65 * 4) / dateType(periodType, days);
+
+const percentageMethod = (num, percentage) => num * percentage / 100;
 
 const covid19ImpactEstimator = (data) => {
-  const impact = {}
-  const severeImpact = {}
 
   // currentlyInfected
-  const impactCurrentlyInfected = data.reportedCases * 10;
-  const sImpactCurrentlyInfected = data.reportedCases * 50;
-  impact.currentlyInfected = impactCurrentlyInfected;
-  severeImpact.currentlyInfected = sImpactCurrentlyInfected;
+  const impactCurrentlyInfected = data.data.reportedCases * 10;
+  const sImpactCurrentlyInfected = data.data.reportedCases * 50;
+
+  data.impact.currentlyInfected = impactCurrentlyInfected;
+  data.severeImpact.currentlyInfected = sImpactCurrentlyInfected;
 
   //infectionsByRequestedTime
-  const factorNum = factor(data.periodType, data.timeToElapse);
+  const factorNum = factor(data.data.periodType, data.data.timeToElapse);
   const rFactorNum = roundNum(factorNum);
   const impactInfectionsByRequestedTime = impactCurrentlyInfected * power(2, rFactorNum);
   const sImpactInfectionsByRequestedTime = sImpactCurrentlyInfected * power(2, rFactorNum);
-  impact.infectionsByRequestedTime = impactInfectionsByRequestedTime;
-  severeImpact.infectionsByRequestedTime = sImpactInfectionsByRequestedTime;
+
+  data.impact.infectionsByRequestedTime = impactInfectionsByRequestedTime;
+  data.severeImpact.infectionsByRequestedTime = sImpactInfectionsByRequestedTime;
 
   //severeCasesByRequestedTime
-  const impact
+  const impactSevereCasesByRequestedTime = percentageMethod(impactInfectionsByRequestedTime, 15);
+  const sImpactSevereCasesByRequestedTime = percentageMethod(sImpactInfectionsByRequestedTime, 15);
+
+  data.impact.severeCasesByRequestedTime = roundNum(impactSevereCasesByRequestedTime);
+  data.severeImpact.severeCasesByRequestedTime = roundNum(sImpactSevereCasesByRequestedTime);
 
   //hospitalBedsByRequestedTime
+  const impactHospitalBedsByRequestedTime = percentageMethod(data.data.totalHospitalBeds, 35) - roundNum(impactSevereCasesByRequestedTime);
+  const sImpactHospitalBedsByRequestedTime = percentageMethod(data.data.totalHospitalBeds, 35) - roundNum(sImpactSevereCasesByRequestedTime);
 
+  data.impact.hospitalBedsByRequestedTime = roundNum(impactHospitalBedsByRequestedTime);
+  data.severeImpact.hospitalBedsByRequestedTime = roundNum(sImpactHospitalBedsByRequestedTime);
+
+  //casesForICUByRequestedTime
+  const impactCasesForICUByRequestedTime = percentageMethod(impactInfectionsByRequestedTime, 5);
+  const sImpactCasesForICUByRequestedTime = percentageMethod(sImpactInfectionsByRequestedTime, 5);
+
+  data.impact.casesForICUByRequestedTime = roundNum(impactCasesForICUByRequestedTime);
+  data.severeImpact.casesForICUByRequestedTime = roundNum(sImpactCasesForICUByRequestedTime);
+
+  // casesForVentilatorsByRequestedTime
+  const impactCaseForVentilatorsByRequestedTime = percentageMethod(impactInfectionsByRequestedTime, 2);
+  const sImpactCaseForVentilatorsByRequestedTime = percentageMethod(sImpactInfectionsByRequestedTime, 2);
+
+  data.impact.casesForVentilatorsByRequestedTime = roundNum(impactCaseForVentilatorsByRequestedTime);
+  data.severeImpact.sImpactCaseForVentilatorsByRequestedTime = roundNum(sImpactCaseForVentilatorsByRequestedTime);
+
+  // dollarsInFlight
+  const days = dateType(data.data.periodType, data.data.timeToElapse);
+  data.impact.dollarsInFlight = roundNum(impactInfectionsByRequestedTime * data.region.avgDailyIncomeInUSD * data.region.avgDailyIncomePopulation * days);
+  data.severeImpact.dollarsInFlight = roundNum(sImpactInfectionsByRequestedTime * data.region.avgDailyIncomeInUSD * data.region.avgDailyIncomePopulation * days);
 }
 
- const a = covid19ImpactEstimator(data);
- console.log(a);
-// export default covid19ImpactEstimator;
+export default covid19ImpactEstimator;

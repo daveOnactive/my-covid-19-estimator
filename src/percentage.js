@@ -1,1 +1,0 @@
-export const percentageMethod = (num, percentage) => num * percentage / 100;
