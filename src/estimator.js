@@ -50,8 +50,9 @@ const covid19ImpactEstimator = (data) => {
   severeImpact.severeCasesByRequestedTime = roundNum(sImpactSevereCases);
 
   // hospitalBedsByRequestedTime
-  const impactHospital = roundNum(percentage(data.totalHospitalBeds, 35)) - roundNum(impactSevereCases);
-  const sImpactHospital = roundNum(percentage(data.totalHospitalBeds, 35)) - roundNum(sImpactSevereCases);
+  const roundValue = roundNum(percentage(data.totalHospitalBeds, 35));
+  const impactHospital = roundValue - roundNum(impactSevereCases);
+  const sImpactHospital = roundValue - roundNum(sImpactSevereCases);
 
   impact.hospitalBedsByRequestedTime = roundNum(impactHospital) + 1;
   severeImpact.hospitalBedsByRequestedTime = roundNum(sImpactHospital) + 1;
