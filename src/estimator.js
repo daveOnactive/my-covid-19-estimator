@@ -70,10 +70,12 @@ const covid19ImpactEstimator = (data) => {
 
   // impact.casesForVentilatorsByRequestedTime = roundNum(impactCaseForVentilators);
   // severeImpact.sImpactCaseForVentilatorsByRequestedTime = roundNum(sImpactCaseForVentilators);
-  impact.casesForICUByRequestedTime = Math.trunc(impactInfectionsByRequestedTime * 0.05);
-  severeImpact.casesForICUByRequestedTime = Math.trunc(sImpactInfectionsByRequestedTime * 0.05);
-  impact.casesForVentilatorsByRequestedTime = Math.trunc(impactInfectionsByRequestedTime * 0.02);
-  const sImpactCaseForVentilators = Math.trunc(impactInfectionsByRequestedTime * 0.02);
+  impact.casesForICUByRequestedTime = Math.trunc(percentage(impactInfectionsByRequestedTime, 5));
+  const x = Math.trunc(percentage(sImpactInfectionsByRequestedTime, 5));
+  severeImpact.casesForICUByRequestedTime = x;
+  const y = Math.trunc(percentage(impactInfectionsByRequestedTime, 2));
+  impact.casesForVentilatorsByRequestedTime = y;
+  const sImpactCaseForVentilators = Math.trunc(percentage(sImpactInfectionsByRequestedTime, 2));
   severeImpact.casesForVentilatorsByRequestedTime = sImpactCaseForVentilators;
 
   // dollarsInFlight
