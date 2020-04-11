@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Covid 19 estimator</title>
+</head>
+<body>
+  <main>
+    <form class="container">
+      <div>
+        <label>population</label>
+        <input data-population type="text">
+      </div>
+      <div>
+        <label>Time to elapse</label>
+        <input data-time-to-elapse type="text">
+      </div>
+      <div>
+        <label>Reported cases</label>
+        <input data-reported-cases type="text">
+      </div>
+      <div>
+        <label>Total hospital beds</label>
+        <input data-total-hospital-beds type="text">
+      </div>
+      <div>
+        <label>Period type</label>
+        <select data-period-type>
+          <option value="days">days</option>
+          <option value="weeks">weeks</option>
+          <option value="months">months</option>
+        </select>
+      </div>
+      <button data-go-estimate>
+        Submit
+      </button>
+    </form>
+  </main>
+</body>
+</html>

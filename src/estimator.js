@@ -1,4 +1,4 @@
-const roundNum = (num) => Math.floor(num);
+const roundNum = (num) => Math.trunc(num);
 
 const power = (num, pow) => num ** pow;
 
