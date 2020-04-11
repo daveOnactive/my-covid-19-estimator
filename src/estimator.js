@@ -1,10 +1,14 @@
 //  /* eslint-disable */ 
-const roundNum = num => Math.floor(num);
+const roundNum = num => {
+  return Math.floor(num)
+};
 
-const power = (num, pow) => Math.pow(num, pow);
+const power = (num, pow) => {
+  return num ** pow;
+};
 
 const dateType = (type, days) => {
-  switch(type) {
+  switch (type) {
     case 'days':
       return days;
     case 'weeks':
@@ -21,9 +25,13 @@ const factor = (periodType, days) => {
   return data / 3;
 };
 
-const dollarsInFlight = (data, days, periodType) => (data * 0.65 * 4) / dateType(periodType, days);
+const dollarsInFlight = (data, days, periodType) => {
+  return (data * 0.65 * 4) / dateType(periodType, days);
+};
 
-const percentageMethod = (num, percentage) => num * percentage / 100;
+const percentageMethod = (num, percentage) => {
+  return num * percentage / 100;
+};
 
 const covid19ImpactEstimator = (data) => {
 
