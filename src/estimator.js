@@ -58,16 +58,16 @@ const covid19ImpactEstimator = (data) => {
   severeImpact.hospitalBedsByRequestedTime = roundNum(sImpactHospital) + 1;
 
   // casesForICUByRequestedTime
-  impact.casesForICUByRequestedTime = percentage(impactInfectionsByRequestedTime, 5);
-  severeImpact.casesForICUByRequestedTime = percentage(sImpactInfectionsByRequestedTime, 5);
+  // impact.casesForICUByRequestedTime = percentage(impactInfectionsByRequestedTime, 5);
+  // severeImpact.casesForICUByRequestedTime = percentage(sImpactInfectionsByRequestedTime, 5);
 
   // casesForVentilatorsByRequestedTime
   impact.casesForVentilatorsByRequestedTime = percentage(impactInfectionsByRequestedTime, 2);
   const z = percentage(sImpactInfectionsByRequestedTime, 2);
   severeImpact.sImpactCaseForVentilatorsByRequestedTime = z;
-  // impact.casesForICUByRequestedTime = Math.trunc(percentage(impactInfectionsByRequestedTime, 5));
-  // const x = Math.trunc(percentage(sImpactInfectionsByRequestedTime, 5));
-  // severeImpact.casesForICUByRequestedTime = x;
+  impact.casesForICUByRequestedTime = Math.trunc(percentage(impactInfectionsByRequestedTime, 5));
+  const x = Math.trunc(percentage(sImpactInfectionsByRequestedTime, 5));
+  severeImpact.casesForICUByRequestedTime = x;
 
   // const y = Math.trunc(percentage(impactInfectionsByRequestedTime, 2));
   // impact.casesForVentilatorsByRequestedTime = y;
