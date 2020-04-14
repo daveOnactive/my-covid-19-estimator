@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content=" estimator covid-19 global">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Covid-19 Estimator</title>
+</head>
+
+<body>
+    <header id="header">
+        <h1>
+            COVID-19 <span>ESTIMATOR</span>
+        </h1>
+    </header>
+    <main id="main">
+        <section>
+            <h3>Fill Out The Form</h3>
+            <form>
+                <div class="grid-display">
+                    <div>
+                        <label for="region">Region <br>
+                            <input type="text" data-region-name value="Africa" placeholder="e.g Africa" disabled />
+                        </label>
+                    </div>
+                    <div>
+                        <label for="average age">Average Age <br>
+                            <input type="text" data-average-age placeholder="e.g 19" required />
+                        </label>
+                    </div>
+                    <div>
+                        <label for="daily income">Average Daily Income(USD)<br>
+                            <input type="number" data-average-daily-income placeholder="e.g 10" required />
+                        </label>
+                    </div>
+                    <div>
+                        <label for="daily income">Population Average Income(daily) <br>
+                            <input type="text" data-average-population-income placeholder="e.g 0.4" required />
+                        </label>
+                    </div>
+                    <div>
+                        <label for="period">Period<br>
+                            <select name="period" data-period-type>
+                                <option value="days">Days</option>
+                                <option value="weeks">Weeks</option>
+                                <option value="months">Months</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="grid-display">
+                    <div>
+                        <label for="elapse time">Time To Elapse<br>
+                            <input type="number" data-time-to-elapse placeholder="e.g 30" required />
+                        </label>
+                    </div>
+                    <div>
+                        <label for="region">Reported Cases<br>
+                            <input type="number" data-reported-cases placeholder="e.g 200" required />
+                        </label>
+                    </div>
+                    <div>
+                        <label for="population">Population<br>
+                            <input type="number" data-population placeholder="e.g 1000000" required />
+                        </label>
+                    </div>
+                    <div>
+                        <label for="region">Total Hospital Beds<br>
+                            <input type="number" data-total-hospital-beds placeholder="e.g 500000" required /></label>
+                    </div>
+                    <input type="submit" data-go-estimate value="GET ESTIMATIONS">
+                </div>
+
+            </form>
+        </section>
+        <section>
+            <div class="estimation">
+
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
